@@ -1,6 +1,7 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <h1>Play</h1>
+  <Stage/>
 </template>
+
+<script setup lang="ts">
+import Stage from '../components/Stage.vue';
+</script>
