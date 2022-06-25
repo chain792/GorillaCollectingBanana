@@ -7,12 +7,19 @@ import { onMounted, watch, toRefs, ref } from 'vue'
 
 interface Props {
   coordinate: string;
+  isFinished: boolean
 }
 const props = defineProps<Props>();
-const { coordinate } = toRefs(props)
+const { coordinate, isFinished } = toRefs(props)
 
 watch(coordinate, () => {
   removeBanana(coordinate.value)
+})
+
+watch(isFinished, () => {
+  if(isFinished){
+    window.clearInterval(intervalID)
+  }
 })
 
 interface Emits {
@@ -36,11 +43,12 @@ for(let i = 0; i < columnNumber; i++){
   }
 }
 
+let intervalID: number
 onMounted(() => {
   bananaLayer = document.getElementById('banana-layer')!
-  window.setInterval(() => {
+  intervalID = window.setInterval(() => {
     addBanana()
-  }, 2000)
+  }, 1000)
 })
 
 const fisherYatesShuffle = (arr: Array<any>) => {

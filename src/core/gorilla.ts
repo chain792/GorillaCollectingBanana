@@ -29,7 +29,7 @@ export class Gorilla {
         },
       ],
       {
-        duration: 2000,
+        duration: 1000,
         fill: 'forwards'
       }
       )
@@ -39,10 +39,12 @@ export class Gorilla {
     //アニメーション終了時ゴリラを移動完了状態にする
     window.setTimeout(()=> {
       this.isMoving = false
-    }, 2000)
+    }, 1000)
   }
+
   gorillaCoordinates(): string | null {
     const matrix = getComputedStyle(this.gorilla).getPropertyValue('transform')
+    //console.log(matrix)
     const a = matrix.split(', ')
     if(a.length === 6){
       const positionX = Math.floor( ((Number(a[4])) + 25) / 50 )
@@ -50,5 +52,15 @@ export class Gorilla {
       return `${positionX}-${positionY}`
     }
     return null
+  }
+
+  positions(): Array<number>{
+    const matrix = getComputedStyle(this.gorilla).getPropertyValue('transform')
+    const a = matrix.split(', ')
+    if(a.length === 6){
+      return [Number(a[4]), Number(a[5].replace(')', ''))]
+    }else{
+      return [0, 0]
+    }
   }
 }
