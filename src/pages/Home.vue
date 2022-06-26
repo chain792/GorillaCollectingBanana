@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>ゴリラのバナナ集め</h1>
+    <h1 class="">ゴリラのバナナ集め</h1>
     <router-link to="/play" class="btn">バナナを集める</router-link><br/>
     <button class="btn" @click="openModal">遊び方</button>
     <HowToPlayModal :isVisible="isVisibleModal" @close-modal="closeModal" />
