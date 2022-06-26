@@ -40,6 +40,7 @@ watch(isFinished, () => {
 
 onBeforeUnmount(() => {
   window.clearInterval(intervalID)
+  Snake.initialize()
 })
 
 </script>

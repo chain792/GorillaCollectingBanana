@@ -62,4 +62,8 @@ export class Snake {
       return false
     }
   }
+
+  static initialize(): void {
+    Snake.snakeNumber = 0
+  }
 }

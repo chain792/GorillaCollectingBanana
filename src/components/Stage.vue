@@ -1,10 +1,11 @@
 <template>
   <div class="stage" @click="moveGorilla">
-    <div class="click-none score">{{score}} pt</div>
+    <div class="click-none score">{{score}} 本</div>
     <img src="../assets/gorilla.png" width="50" height="50" class="click-none" id="gorilla">
     <BananaLayer class="click-none" @create-banana="createBanana" :isFinished="isFinished" />
     <SnakeLayer class="click-none" @create-snake="createSnake" :isFinished="isFinished" />
   </div>
+  <GameOverModal :isVisible="isVisibleModal" :score="score" @close-modal="closeModal" /> 
 </template>
 
 <script setup lang="ts">
@@ -14,6 +15,7 @@ import { Banana } from '../core/banana'
 import { Snake } from '../core/snake'
 import BananaLayer from '../components/BananaLayer.vue'
 import SnakeLayer from '../components/SnakeLayer.vue'
+import GameOverModal from './GameOverModal.vue'
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
@@ -42,7 +44,7 @@ const createSnake = (snake: Snake) => {
 const play = () => {
   bananas.forEach(banana => {
     if(banana.isCollision(gorilla.positions())){
-      score.value += 100
+      score.value += 1
       banana.destroy()
       const index = bananas.indexOf(banana)
       bananas.splice(index, 1)
@@ -53,7 +55,7 @@ const play = () => {
     snake.move(gorilla.positions())
     if(snake.isCollision(gorilla.positions())){
       isFinished.value = true
-      alert('gameover')
+      openModal()
       return
     }
   })
@@ -64,6 +66,18 @@ const play = () => {
 onBeforeUnmount(() => {
   isFinished.value = true
 })
+
+
+/* モーダル処理 */
+const isVisibleModal = ref(false)
+
+const openModal = (): void => {
+  isVisibleModal.value = true
+}
+
+const closeModal = (): void => {
+  isVisibleModal.value = false
+}
 
 </script>
 

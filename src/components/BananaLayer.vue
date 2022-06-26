@@ -44,6 +44,7 @@ watch(isFinished, () => {
 
 onBeforeUnmount(() => {
   window.clearInterval(intervalID)
+  Grid.initialize()
 })
 
 </script>

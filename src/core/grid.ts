@@ -1,8 +1,8 @@
 import { fisherYatesShuffle } from './utils/shuffle'
 
 export class Grid {
-  private static rowNumber: number = 12
-  private static columnNumber: number = 16
+  private static readonly rowNumber: number = 12
+  private static readonly columnNumber: number = 16
   private static grids: Array<Grid> = []
   readonly row: number
   readonly column: number
@@ -32,5 +32,9 @@ export class Grid {
 
   release(): void {
     this.isUsed = false
+  }
+
+  static initialize(): void {
+    Grid.grids = []
   }
 }
