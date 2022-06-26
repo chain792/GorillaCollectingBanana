@@ -71,6 +71,10 @@ const play = () => {
   margin: 0 auto;
   margin-top: 50px;
   position: relative;
+  -webkit-user-select: none;
+	-moz-user-select: none;
+  -ms-user-select: none;
+	user-select: none;
 }
 
 .click-none{
