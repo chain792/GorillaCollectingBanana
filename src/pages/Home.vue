@@ -1,8 +1,20 @@
 <template>
-  <div class="container">
-    <h1 class="">ゴリラのバナナ集め</h1>
-    <router-link to="/play" class="btn">バナナを集める</router-link><br/>
-    <button class="btn" @click="openModal">遊び方</button>
+  <div class="text-center font-semibold mt-10">
+    <div class="flex justify-center">
+      <img src="../assets/gorilla.png" alt="" width="50" height="50">
+      <h1 class="text-6xl title-color">ゴリラのバナナ集め</h1>
+      <img src="../assets/banana.png" alt="" width="50" height="50">
+    </div>
+    <div class="flex justify-center items-center" style="height: 60vh;">
+      <div>
+        <div>
+          <router-link to="/play" class="btn text-2xl">バナナを集める</router-link>
+        </div>
+        <div class="mt-5">
+          <button class="btn text-2xl" @click="openModal">遊び方</button>
+        </div>
+      </div>
+    </div>
     <HowToPlayModal :isVisible="isVisibleModal" @close-modal="closeModal" />
   </div>
 </template>
@@ -22,8 +34,8 @@ const closeModal = (): void => {
 </script>
 
 <style scoped>
-.container{
-  text-align: center;
+.title-color{
+  color: #eb1b00;
 }
 .btn {
   background-color: #eb6100;

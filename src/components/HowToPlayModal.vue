@@ -2,18 +2,18 @@
   <teleport to="body">
     <div class="modal" id="sample-modal" v-show="isVisible" @click="close"></div>
     <div class="modal-content" v-show="isVisible">
-      <h1>遊び方</h1>
+      <h1 class="text-2xl">遊び方</h1>
       <div>
-        <h3>1. ステージをクリックしてゴリラを移動させよう！</h3>
+        <p class="text-lg mt-5">1. ステージをクリックしてゴリラを移動させよう！</p>
         <div>
           <img src="/src/assets/play_movie.gif" alt="" width="380">
         </div>
-        <div>
+        <div class="text-base mt-3">
           ※移動距離が長いほど速く移動できます！<br/>
-          ※移動が終わるまでに他の場所へ移動させることはできません
+          ※移動が終わるまで、他の場所に移動できません
         </div>
-        <h3>2. バナナを集めてポイントを獲得しよう！</h3>
-        <h3>3. ヘビに当たるとゲームオーバーです！</h3>
+        <p class="text-lg mt-5">2. バナナを集めてポイントを獲得しよう！</p>
+        <p class="text-lg mt-5">3. ヘビに当たるとゲームオーバーです！</p>
       </div>
     </div>
   </teleport>

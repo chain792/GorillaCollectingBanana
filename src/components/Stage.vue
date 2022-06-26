@@ -92,5 +92,6 @@ onBeforeUnmount(() => {
   color: #fff;
   font-weight: bold;
   z-index: 9999;
+  font-size: 18px;
 }
 </style>

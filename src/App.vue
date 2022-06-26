@@ -8,5 +8,6 @@
 <style>
   body{
     background-color: aliceblue;
+    font-family: monospace;
   }
 </style>

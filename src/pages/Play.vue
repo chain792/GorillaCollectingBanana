@@ -1,7 +1,7 @@
 <template>
   <Stage/>
   <div class="stage-below">
-    <router-link to="/" class="btn">トップページに戻る</router-link>
+    <router-link to="/" class="btn text-2xl">トップページに戻る</router-link>
   </div>
 </template>
 
