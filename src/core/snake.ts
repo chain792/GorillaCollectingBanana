@@ -7,7 +7,7 @@ export class Snake {
 
   constructor(parentElement: HTMLElement){
     const snakeImage = document.createElement('img')
-    snakeImage.src = '/src/assets/snake.png'
+    snakeImage.src = '/snake.png'
     snakeImage.width=50
     snakeImage.height=50
     snakeImage.style.position = 'absolute'

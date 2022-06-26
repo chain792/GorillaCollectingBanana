@@ -7,7 +7,7 @@
       <p>{{props.score}} 本</p>
       <div class="flex">
         <button class="btn" @click="reload">もう一度プレイ</button>
-        <button>ツイート</button>
+        <a :href="`https://twitter.com/intent/tweet?url=https://gorilla-collecting-banana.netlify.app/&hashtags=ゴリラのバナナ集め&text=ゴリラが集めたバナナの本数は${props.score}本でした！`" class="twitter-btn" target="_blank">ツイートする</a>
       </div>
     </div>
   </teleport>
@@ -67,5 +67,24 @@ const reload = (): void => {
   height: auto;
   border-radius: 20px;
   padding: 20px;
+}
+
+.twitter-btn {
+  background-color: #55acee;
+  border-radius: 100vh;
+  text-decoration: none;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  -webkit-user-select: none;
+	-moz-user-select: none;
+  -ms-user-select: none;
+	user-select: none;
+}
+
+.twitter-btn:hover{
+  background: #558dee;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+  padding: 11px;
 }
 </style>

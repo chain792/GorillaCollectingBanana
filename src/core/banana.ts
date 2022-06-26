@@ -11,7 +11,7 @@ export class Banana {
 
     const bananaImage = document.createElement('img')
     bananaImage.id = `${grid.row}-${grid.column}`
-    bananaImage.src = '/src/assets/banana.png'
+    bananaImage.src = '/banana.png'
     bananaImage.width = 50
     bananaImage.height = 50
     bananaImage.style.position = 'absolute'
