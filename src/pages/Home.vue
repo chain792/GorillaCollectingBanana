@@ -1,11 +1,24 @@
 <template>
   <div class="container">
     <h1>ゴリラのバナナ集め</h1>
-    <router-link to="/play" class="btn">バナナを集める</router-link>
+    <router-link to="/play" class="btn">バナナを集める</router-link><br/>
+    <button class="btn" @click="openModal">遊び方</button>
+    <HowToPlayModal :isVisible="isVisibleModal" @close-modal="closeModal" />
   </div>
 </template>
 
 <script setup lang="ts">
+import HowToPlayModal from '../components/HowToPlayModal.vue';
+import { ref } from 'vue'
+
+const isVisibleModal = ref(false)
+const openModal = (): void => {
+  isVisibleModal.value = true
+}
+const closeModal = (): void => {
+  isVisibleModal.value = false
+}
+
 </script>
 
 <style scoped>
