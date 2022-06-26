@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, toRefs } from 'vue'
+import { onMounted, watch, toRefs, onBeforeUnmount } from 'vue'
 import { Snake } from '../core/snake'
 
 interface Props {
@@ -36,6 +36,10 @@ watch(isFinished, () => {
   if(isFinished){
     window.clearInterval(intervalID)
   }
+})
+
+onBeforeUnmount(() => {
+  window.clearInterval(intervalID)
 })
 
 </script>

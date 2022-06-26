@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,  onBeforeUnmount } from 'vue'
 import { Gorilla } from '../core/gorilla'
 import { Banana } from '../core/banana'
 import { Snake } from '../core/snake'
@@ -60,6 +60,10 @@ const play = () => {
   if(isFinished.value) return
   requestAnimationFrame(play)
 }
+
+onBeforeUnmount(() => {
+  isFinished.value = true
+})
 
 </script>
 

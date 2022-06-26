@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, toRefs } from 'vue'
+import { onMounted, watch, toRefs, onBeforeUnmount } from 'vue'
 import { Grid } from '../core/grid'
 import { Banana } from '../core/banana'
 
@@ -40,6 +40,10 @@ watch(isFinished, () => {
   if(isFinished){
     window.clearInterval(intervalID)
   }
+})
+
+onBeforeUnmount(() => {
+  window.clearInterval(intervalID)
 })
 
 </script>
