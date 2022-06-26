@@ -1,4 +1,3 @@
-import { Gorilla } from './gorilla';
 export class Snake {
   private snake: HTMLElement
   private positionX: number
@@ -12,9 +11,8 @@ export class Snake {
     snakeImage.width=50
     snakeImage.height=50
     snakeImage.style.position = 'absolute'
-    snakeImage.style.top = '0'
+    snakeImage.style.top = '0px'
     snakeImage.style.left = '0px'
-    parentElement.appendChild(snakeImage)
     let x = 0
     let y = 0
     switch (Snake.snakeNumber % 4){
@@ -36,6 +34,7 @@ export class Snake {
         break
     }
     snakeImage.style.transform = `matrix(1, 0, 0, 1, ${x}, ${y})`
+    parentElement.appendChild(snakeImage)
     this.positionX = x
     this.positionY = y
     this.snake = snakeImage

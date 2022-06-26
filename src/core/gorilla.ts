@@ -42,18 +42,6 @@ export class Gorilla {
     }, 1000)
   }
 
-  gorillaCoordinates(): string | null {
-    const matrix = getComputedStyle(this.gorilla).getPropertyValue('transform')
-    //console.log(matrix)
-    const a = matrix.split(', ')
-    if(a.length === 6){
-      const positionX = Math.floor( ((Number(a[4])) + 25) / 50 )
-      const positionY = Math.floor( (Number(a[5].replace(')', '')) + 25) / 50)
-      return `${positionX}-${positionY}`
-    }
-    return null
-  }
-
   positions(): Array<number>{
     const matrix = getComputedStyle(this.gorilla).getPropertyValue('transform')
     const a = matrix.split(', ')

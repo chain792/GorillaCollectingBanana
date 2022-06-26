@@ -2,28 +2,24 @@
   <div class="stage" @click="moveGorilla">
     <div class="click-none score">{{score}} pt</div>
     <img src="../assets/gorilla.png" width="50" height="50" class="click-none" id="gorilla">
-    <BananaLayer class="click-none" @create-banana="createBanana" @delete-banana="deleteBanana" :coordinate="coordinate" :isFinished="isFinished" />
+    <BananaLayer class="click-none" @create-banana="createBanana" :isFinished="isFinished" />
     <SnakeLayer class="click-none" @create-snake="createSnake" :isFinished="isFinished" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Gorilla } from '../core/gorilla'
+import { Banana } from '../core/banana'
 import { Snake } from '../core/snake'
 import BananaLayer from '../components/BananaLayer.vue'
 import SnakeLayer from '../components/SnakeLayer.vue'
 
 let gorilla: Gorilla
-const bananaCoordinates: Array<string> = []
+const bananas: Array<Banana> = []
 const snakes: Array<Snake> = []
 let score = ref(0)
-let coordinate = ref('')
 let isFinished = ref(false)
-
-const computedCoordinate = computed(() => {
-  return coordinate.value
-})
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
@@ -35,13 +31,8 @@ const moveGorilla = (e: MouseEvent): void => {
   gorilla.move(e.offsetX, e.offsetY)
 }
 
-const createBanana = (coordinate: string) => {
-  bananaCoordinates.push(coordinate)
-}
-
-const deleteBanana = (coordinate: string) => {
-  const index = bananaCoordinates.indexOf(coordinate)
-  bananaCoordinates.splice(index, 1)
+const createBanana = (banana: Banana) => {
+  bananas.push(banana)
 }
 
 const createSnake = (snake: Snake) => {
@@ -49,16 +40,14 @@ const createSnake = (snake: Snake) => {
 }
 
 const play = () => {
-  const gorillaCoordinate = gorilla.gorillaCoordinates()
-  if(gorillaCoordinate){
-
-    if(bananaCoordinates.includes(gorillaCoordinate)){
+  bananas.forEach(banana => {
+    if(banana.isCollision(gorilla.positions())){
       score.value += 100
-      coordinate.value = gorillaCoordinate
-    }else{
-      coordinate.value = ''
+      banana.destroy()
+      const index = bananas.indexOf(banana)
+      bananas.splice(index, 1)
     }
-  }
+  })
 
   snakes.forEach(snake => {
     snake.move(gorilla.positions())

@@ -3,18 +3,38 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, toRefs, ref } from 'vue'
+import { onMounted, watch, toRefs } from 'vue'
+import { Grid } from '../core/grid'
+import { Banana } from '../core/banana'
 
 interface Props {
-  coordinate: string;
   isFinished: boolean
 }
 const props = defineProps<Props>();
-const { coordinate, isFinished } = toRefs(props)
+const { isFinished } = toRefs(props)
 
-watch(coordinate, () => {
-  removeBanana(coordinate.value)
+interface Emits {
+  (e: 'create-banana', value: Banana): void
+}
+const emit = defineEmits<Emits>()
+
+let bananaLayer: HTMLElement
+let intervalID: number
+
+onMounted(() => {
+  Grid.setup()
+  bananaLayer = document.getElementById('banana-layer')!
+  intervalID = window.setInterval(() => {
+    addBanana()
+  }, 500)
 })
+
+const addBanana = (): void => {
+  const grid = Grid.getUnUsedGrid()
+  if(!grid) return
+  const banana = new Banana(bananaLayer, grid)
+  emit('create-banana', banana)
+}
 
 watch(isFinished, () => {
   if(isFinished){
@@ -22,72 +42,6 @@ watch(isFinished, () => {
   }
 })
 
-interface Emits {
-  (e: 'create-banana', value: string): void
-  (e: 'delete-banana', value: string): void
-}
-const emit = defineEmits<Emits>()
-
-let bananaLayer: HTMLElement
-const columnNumber = 16
-const rowNumber = 12
-type Grid = {
-  row: number
-  column: number
-  isBanana: boolean
-}
-const bananaGrids: Array<Grid> = []
-for(let i = 0; i < columnNumber; i++){
-  for(let j = 0; j < rowNumber; j++){
-    bananaGrids.push({row: j, column: i, isBanana: false})
-  }
-}
-
-let intervalID: number
-onMounted(() => {
-  bananaLayer = document.getElementById('banana-layer')!
-  intervalID = window.setInterval(() => {
-    addBanana()
-  }, 1000)
-})
-
-const fisherYatesShuffle = (arr: Array<any>) => {
-  for(let i = arr.length-1 ; i>0 ;i--){
-    let j = Math.floor( Math.random() * (i + 1) );
-    [arr[i],arr[j]]=[arr[j],arr[i]] 
-  }
-}
-
-const addBanana = (): void => {
-  fisherYatesShuffle(bananaGrids)
-  const grid = bananaGrids.filter(v => !v.isBanana)[0]
-  if(!grid) return
-  grid.isBanana = true
-
-  const bananaImage = document.createElement('img')
-  bananaImage.id = `${grid.column}-${grid.row}`
-  bananaImage.src = '/src/assets/banana.png'
-  bananaImage.width=50
-  bananaImage.height=50
-  bananaImage.style.position = 'absolute'
-
-  bananaImage.style.top = `${grid.row * 50}px`
-  bananaImage.style.left = `${grid.column * 50}px`
-  bananaLayer.appendChild(bananaImage)
-
-  emit('create-banana', `${grid.column}-${grid.row}`)
-}
-
-const removeBanana = (coordinate: string): void => {
-  const bananaElement = document.getElementById(coordinate)
-  if(!bananaElement) return
-  bananaElement.remove()
-  const c = Number(coordinate.replace(/-.*/, ''))
-  const r = Number(coordinate.replace(/.*-/, ''))
-  bananaGrids.find((v) => v.column === c && v.row === r)!.isBanana = false
-
-  emit('delete-banana', coordinate)
-}
 </script>
 
 <style scoped>
