@@ -2,18 +2,22 @@
   <teleport to="body">
     <div class="modal" id="sample-modal" v-show="isVisible" @click="close"></div>
     <div class="modal-content" v-show="isVisible">
-      <p>GAME OVER</p>
-      <p>集めたバナナの本数</p>
-      <p>{{props.score}} 本</p>
-      <div class="flex">
-        <button class="btn" @click="reload">もう一度プレイ</button>
-        <a :href="`https://twitter.com/intent/tweet?url=https://gorilla-collecting-banana.netlify.app/&hashtags=ゴリラのバナナ集め&text=ゴリラが集めたバナナの本数は${props.score}本でした！`" class="twitter-btn" target="_blank">ツイートする</a>
+      <p class="game-over">GAME OVER</p>
+      <p class="text-lg mt-3">集めたバナナの本数</p>
+      <p class="text-2xl mt-1">{{score}} 本</p>
+      <div class="mt-5">
+        <ReplayAndTweetButton :score="score" />
       </div>
     </div>
   </teleport>
 </template>
 
 <script setup lang="ts">
+import { useStageStore } from '../store/stageStore'
+import ReplayAndTweetButton from '../components/ReplayAndTweetButton.vue';
+
+const store = useStageStore()
+
 interface Props {
   isVisible: boolean
   score: number
@@ -29,12 +33,8 @@ const emit = defineEmits<Emits>()
 
 const close = (): void => {
   emit('close-modal')
+  store.set(props.score)
 }
-
-const reload = (): void => {
-  document.location.reload()
-}
-
 
 </script>
 
@@ -64,7 +64,7 @@ const reload = (): void => {
   justify-content: center;
   background-color: #f0f0f0;
   width: 600px;
-  height: auto;
+  height: 300px;
   border-radius: 20px;
   padding: 20px;
 }
@@ -86,5 +86,13 @@ const reload = (): void => {
   background: #558dee;
   box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
   padding: 11px;
+}
+
+.game-over{
+  color: #FF8C00;
+  background: -webkit-linear-gradient(0deg, #40E0D0, #FF8C00, #FF0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 35px;
 }
 </style>
