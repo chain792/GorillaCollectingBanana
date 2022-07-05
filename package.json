@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "firebase": "^9.8.4",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
     "vue-gtag": "^2.0.1",

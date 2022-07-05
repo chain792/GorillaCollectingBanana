@@ -2,10 +2,14 @@
   <div class="flex justify-center">
     <button class="btn text-xl mr-3" @click="reload">もう一度プレイ</button>
     <a :href="`https://twitter.com/intent/tweet?url=https://gorilla-collecting-banana.netlify.app/&hashtags=ゴリラのバナナ集め&text=ゴリラが集めたバナナの本数は${score}本でした！`" class="twitter-btn  text-xl" target="_blank">ツイートする</a>
+    <button class="btn text-xl mr-3" @click="registerRanking">ランキングに登録する</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { db } from '../firebase/firebase'
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+
 interface Props {
   score: number
 }
@@ -13,6 +17,18 @@ const props = defineProps<Props>()
 
 const reload = (): void => {
   document.location.reload()
+}
+
+const registerRanking = async (): Promise<void> => {
+  try {
+    const docRef = await addDoc(collection(db, "rankings"), {
+      name: "test",
+      score: 100,
+      createdAt: Timestamp.now()
+    });
+  } catch (e) {
+    console.error("Error adding firestore: ", e);
+  }
 }
 </script>
 
