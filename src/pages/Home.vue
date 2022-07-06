@@ -9,6 +9,8 @@
       <div>
         <div>
           <router-link to="/play" class="btn text-2xl">バナナを集める</router-link>
+          <router-link to="/play2" class="btn text-2xl">バナナを集める2</router-link>
+          <router-link to="/play3" class="btn text-2xl">バナナを集める3</router-link>
         </div>
         <div class="mt-5">
           <button class="btn text-2xl" @click="openModal">遊び方</button>
