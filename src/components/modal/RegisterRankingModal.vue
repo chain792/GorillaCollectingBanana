@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { db } from '../../firebase/firebase'
 import { collection, addDoc, Timestamp} from "firebase/firestore";
 import { useStageStore } from '../../store/stageStore'
@@ -42,7 +42,15 @@ const close = ():void => {
   emit('close-modal')
 }
 
+
 const name = ref('')
+
+// ローカルストレージに名前の情報があれば事前に読み込む
+onMounted(() => {
+  if(localStorage.gorillaName){
+    name.value = localStorage.gorillaName
+  }
+})
 
 const submit = async (): Promise<void> => {
   try {
@@ -52,6 +60,8 @@ const submit = async (): Promise<void> => {
       createdAt: Timestamp.now()
     })
     store.registered()
+    // ローカルストレージに名前を書き込み、次回以降自動で入力されるようにする
+    localStorage.gorillaName = name.value
     close()
   } catch (e) {
     console.error("Error adding firestore: ", e)
