@@ -1,16 +1,29 @@
 <template>
   <button class="ranking-btn text-xl -mr-3" @click="showRankingModal">ランキングを見る</button>
-  <RankingModal :isVisible="isVisibleRankingModal" @close-modal="closeRankingModal" />
+  <RankingModal 
+    :isVisible="isVisibleRankingModal" 
+    @close-modal="closeRankingModal"
+    :rankings="rankings"  
+  />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
+import { db } from '../../firebase/firebase'
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import RankingModal from '../modal/RankingModal.vue';
 
-/* モーダル処理 */
+
 const isVisibleRankingModal = ref(false)
 
-const showRankingModal = (): void => {
+let rankings = reactive<any[]>([])
+
+const showRankingModal = async (): Promise<void> => {
+  rankings.splice(0)
+  const querySnapshot = await getDocs(query(collection(db, "rankings"), orderBy('score', 'desc'), limit(10)));
+  querySnapshot.forEach((doc) => {
+    rankings.push(doc.data())
+  });
   isVisibleRankingModal.value = true
 }
 

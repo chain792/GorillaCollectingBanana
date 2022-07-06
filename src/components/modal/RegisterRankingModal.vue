@@ -90,8 +90,4 @@ const submit = async (): Promise<void> => {
   border-radius: 20px;
   padding: 20px;
 }
-
-
-
-
 </style>

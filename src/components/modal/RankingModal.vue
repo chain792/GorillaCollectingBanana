@@ -40,12 +40,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue'
-import { db } from '../../firebase/firebase'
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 
 interface Props {
   isVisible: boolean
+  rankings: any[]
 }
 const props = withDefaults(defineProps<Props>(),{
   isVisible: false
@@ -59,16 +57,6 @@ const emit = defineEmits<Emits>()
 const close = ():void => {
   emit('close-modal')
 }
-
-
-const rankings = reactive<any[]>([])
-
-onMounted(async () => {
-  const querySnapshot = await getDocs(query(collection(db, "rankings"), orderBy('score', 'desc'), limit(10)));
-  querySnapshot.forEach((doc) => {
-    rankings.push(doc.data())
-  });
-})
 
 </script>
 
