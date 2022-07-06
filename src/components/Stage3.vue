@@ -3,7 +3,7 @@
     <div class="click-none score">{{score}} 本</div>
     <img src="../assets/gorilla.png" width="50" height="50" class="click-none" id="gorilla">
     <BananaLayer class="click-none" @create-banana="createBanana" :isFinished="isFinished" />
-    <ReaperLayer class="click-none" @create-reaper="createReaper" :isFinished="isFinished" />
+    <DragonLayer class="click-none" @create-dragon="createDragon" :isFinished="isFinished" />
   </div>
   <GameOverModal :isVisible="isVisibleModal" :score="score" @close-modal="closeModal" /> 
 </template>
@@ -12,9 +12,9 @@
 import { ref, onMounted,  onBeforeUnmount } from 'vue'
 import { Gorilla } from '../core/gorilla'
 import { Banana } from '../core/banana'
-import { Reaper } from '../core/reaper'
+import { Dragon } from '../core/dragon'
 import BananaLayer from '../components/BananaLayer.vue'
-import ReaperLayer from '../components/ReaperLayer.vue'
+import DragonLayer from '../components/DragonLayer.vue'
 import GameOverModal from './modal/GameOverModal.vue'
 import { useStageStore } from '../store/stageStore'
 
@@ -22,7 +22,7 @@ const store = useStageStore()
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
-const reapers: Array<Reaper> = []
+const dragons: Array<Dragon> = []
 let score = ref(0)
 let isFinished = ref(false)
 
@@ -40,8 +40,8 @@ const createBanana = (banana: Banana) => {
   bananas.push(banana)
 }
 
-const createReaper = (reaper: Reaper) => {
-  reapers.push(reaper)
+const createDragon = (dragon: Dragon) => {
+  dragons.push(dragon)
 }
 
 const play = () => {
@@ -54,14 +54,26 @@ const play = () => {
     }
   })
 
-  reapers.forEach(reaper => {
-    reaper.move(gorilla.positions())
-    if(reaper.isCollision(gorilla.positions())){
+  dragons.forEach(dragon => {
+    dragon.move(gorilla.positions())
+    if(dragon.isCollision(gorilla.positions())){
       isFinished.value = true
       store.set(score.value)
       openModal()
       return
     }
+
+    dragon.fires.forEach(fire => {
+      if(!fire.isOutStage()){
+        fire.move()
+        if(fire.isCollision(gorilla.positions())){
+          isFinished.value = true
+          store.set(score.value)
+          openModal()
+          return
+        }
+      }
+    })
   })
   if(isFinished.value) return
   requestAnimationFrame(play)
@@ -89,7 +101,7 @@ const closeModal = (): void => {
 .stage{
   width: 800px;
   height: 600px;
-  background-color: rgba(169, 169, 169, 0.5);
+  background-color: darkseagreen;
   margin: 0 auto;
   margin-top: 50px;
   position: relative;
