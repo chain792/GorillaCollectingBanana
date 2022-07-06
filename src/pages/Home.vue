@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import HowToPlayModal from '../components/HowToPlayModal.vue';
+import HowToPlayModal from '../components/modal/HowToPlayModal.vue';
 import { ref } from 'vue'
 
 const isVisibleModal = ref(false)

@@ -15,7 +15,7 @@ import { Banana } from '../core/banana'
 import { Snake } from '../core/snake'
 import BananaLayer from '../components/BananaLayer.vue'
 import SnakeLayer from '../components/SnakeLayer.vue'
-import GameOverModal from './GameOverModal.vue'
+import GameOverModal from './modal/GameOverModal.vue'
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []

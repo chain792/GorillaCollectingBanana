@@ -5,16 +5,24 @@
       <p class="game-over">GAME OVER</p>
       <p class="text-lg mt-3">集めたバナナの本数</p>
       <p class="text-2xl mt-1">{{score}} 本</p>
-      <div class="mt-5">
-        <ReplayAndTweetButton :score="score" />
+      <div class="mt-5 flex justify-center">
+        <ReplayButton />
+        <TweetButton :score="score" />
+      </div>
+      <div class="mt-5 flex justify-center">
+        <RegisterRankingButton />
+        <ShowRankingButton />
       </div>
     </div>
   </teleport>
 </template>
 
 <script setup lang="ts">
-import { useStageStore } from '../store/stageStore'
-import ReplayAndTweetButton from '../components/ReplayAndTweetButton.vue';
+import { useStageStore } from '../../store/stageStore'
+import ReplayButton from '../button/ReplayButton.vue'
+import TweetButton from '../button/TweetButton.vue'
+import RegisterRankingButton from '../button/RegisterRankingButton.vue'
+import ShowRankingButton from '../button/ShowRankingButton.vue'
 
 const store = useStageStore()
 
