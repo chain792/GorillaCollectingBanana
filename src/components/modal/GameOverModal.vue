@@ -5,18 +5,23 @@
       <p class="game-over">GAME OVER</p>
       <p class="text-lg mt-3">集めたバナナの本数</p>
       <p class="text-2xl mt-1">{{score}} 本</p>
-      <div class="mt-5">
-        <ReplayAndTweetButton :score="score" />
+      <div class="mt-5 flex justify-center">
+        <ReplayButton class="-ml-6" />
+        <TweetButton :score="score" />
+      </div>
+      <div class="mt-5 flex justify-center">
+        <RegisterRankingButton />
+        <RankingButton />
       </div>
     </div>
   </teleport>
 </template>
 
 <script setup lang="ts">
-import { useStageStore } from '../store/stageStore'
-import ReplayAndTweetButton from '../components/ReplayAndTweetButton.vue';
-
-const store = useStageStore()
+import ReplayButton from '../button/ReplayButton.vue'
+import TweetButton from '../button/TweetButton.vue'
+import RegisterRankingButton from '../button/RegisterRankingButton.vue'
+import RankingButton from '../button/RankingButton.vue'
 
 interface Props {
   isVisible: boolean
@@ -33,7 +38,6 @@ const emit = defineEmits<Emits>()
 
 const close = (): void => {
   emit('close-modal')
-  store.set(props.score)
 }
 
 </script>
