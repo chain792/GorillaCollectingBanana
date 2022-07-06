@@ -1,36 +1,34 @@
 <template>
-  <button class="text-xl mr-3 ranking-btn" @click="registerRanking">ランキング登録</button>
+  <button class="text-xl mr-3 ranking-btn" 
+    @click="showRegisterRankingModal"
+    :disabled="store.isRegistered"
+  >
+    ランキング登録
+  </button>
+  <RegisterRankingModal
+    :isVisible="isVisibleRegisterRankingModal"
+    @close-modal="closeRegisterRankingModal"
+    :score="store.score" 
+  />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { db } from '../../firebase/firebase'
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import RegisterRankingModal from '../modal/RegisterRankingModal.vue';
+import { useStageStore } from '../../store/stageStore'
 
-const registerRanking = async (): Promise<void> => {
-  try {
-    const docRef = await addDoc(collection(db, "rankings"), {
-      name: "test",
-      score: 100,
-      createdAt: Timestamp.now()
-    });
-  } catch (e) {
-    console.error("Error adding firestore: ", e);
-  }
-}
-
-
+const store = useStageStore()
 
 /* モーダル処理 */
-// const isVisibleRankingModal = ref(false)
+const isVisibleRegisterRankingModal = ref(false)
 
-// const showRanking = (): void => {
-//   isVisibleRankingModal.value = true
-// }
+const showRegisterRankingModal = (): void => {
+  isVisibleRegisterRankingModal.value = true
+}
 
-// const closeRankingModal = (): void => {
-//   isVisibleRankingModal.value = false
-// }
+const closeRegisterRankingModal = (): void => {
+  isVisibleRegisterRankingModal.value = false
+}
 
 </script>
 
@@ -51,6 +49,17 @@ const registerRanking = async (): Promise<void> => {
 .ranking-btn:hover{
   background: rgb(250, 195, 10);
   box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
-  padding: 11px;
+}
+
+.ranking-btn:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  box-shadow: none;
+  font-size:0;
+}
+.ranking-btn:disabled::before {
+  font-size: 1rem;
+  content: 'ランキング登録済みです';
+  color: rgb(240, 0, 0);
 }
 </style>

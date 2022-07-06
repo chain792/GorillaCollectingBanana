@@ -28,6 +28,5 @@ const props = defineProps<Props>()
 .twitter-btn:hover{
   background: #558dee;
   box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
-  padding: 11px;
 }
 </style>

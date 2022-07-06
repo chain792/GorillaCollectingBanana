@@ -1,21 +1,21 @@
 <template>
-  <button class="ranking-btn text-xl mr-3" @click="showRanking">ランキングを見る</button>
-  <ShowRankingModal :isVisible="isVisibleShowRankingModal" @close-modal="closeRankingModal" />
+  <button class="ranking-btn text-xl -mr-3" @click="showRankingModal">ランキングを見る</button>
+  <RankingModal :isVisible="isVisibleRankingModal" @close-modal="closeRankingModal" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import ShowRankingModal from '../modal/ShowRankingModal.vue';
+import RankingModal from '../modal/RankingModal.vue';
 
 /* モーダル処理 */
-const isVisibleShowRankingModal = ref(false)
+const isVisibleRankingModal = ref(false)
 
-const showRanking = (): void => {
-  isVisibleShowRankingModal.value = true
+const showRankingModal = (): void => {
+  isVisibleRankingModal.value = true
 }
 
 const closeRankingModal = (): void => {
-  isVisibleShowRankingModal.value = false
+  isVisibleRankingModal.value = false
 }
 
 </script>
@@ -37,6 +37,5 @@ const closeRankingModal = (): void => {
 .ranking-btn:hover{
   background: rgb(250, 195, 10);
   box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
-  padding: 11px;
 }
 </style>

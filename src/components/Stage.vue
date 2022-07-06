@@ -16,6 +16,9 @@ import { Snake } from '../core/snake'
 import BananaLayer from '../components/BananaLayer.vue'
 import SnakeLayer from '../components/SnakeLayer.vue'
 import GameOverModal from './modal/GameOverModal.vue'
+import { useStageStore } from '../store/stageStore'
+
+const store = useStageStore()
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
@@ -55,6 +58,7 @@ const play = () => {
     snake.move(gorilla.positions())
     if(snake.isCollision(gorilla.positions())){
       isFinished.value = true
+      store.set(score.value)
       openModal()
       return
     }

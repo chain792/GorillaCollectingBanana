@@ -5,7 +5,7 @@
       <h1 class="text-2xl">ランキング</h1>
       <div class="shadow-md mt-5">
         <table class="w-full text-left width-600">
-          <thead class="text-gray-700 bg-gray-50 dark:bg-gray-700">
+          <thead class="text-gray-700 bg-gray-50">
             <tr>
               <th scope="col" class="px-8 py-3 w-3/12">
                 順位
