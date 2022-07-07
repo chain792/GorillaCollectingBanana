@@ -54,7 +54,7 @@ onMounted(() => {
 
 const submit = async (): Promise<void> => {
   try {
-    const docRef = await addDoc(collection(db, "rankings"), {
+    const docRef = await addDoc(collection(db, store.collectionName), {
       name: name.value,
       score: props.score,
       createdAt: Timestamp.now()

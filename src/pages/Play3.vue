@@ -3,7 +3,7 @@
   <div class="mt-10 text-center">
     <div class="flex justify-center" v-show="store.isPlayFinished">
       <ReplayButton />
-      <TweetButton :score="store.score" class="mr-3" />
+      <TweetButton class="mr-3" />
       <RegisterRankingButton />
       <RankingButton />
     </div>
@@ -23,6 +23,7 @@ import { useStageStore } from '../store/stageStore'
 
 const store = useStageStore()
 store.$reset()
+store.extraMode()
 
 </script>
 
