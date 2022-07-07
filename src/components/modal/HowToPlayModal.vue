@@ -13,7 +13,7 @@
           ※移動が終わるまで、他の場所に移動できません
         </div>
         <p class="text-lg mt-5">2. バナナを集めてポイントを獲得しよう！</p>
-        <p class="text-lg mt-5">3. ヘビに当たるとゲームオーバーです！</p>
+        <p class="text-lg mt-5">3. 敵に当たるとゲームオーバーです！</p>
       </div>
     </div>
   </teleport>
