@@ -1,5 +1,5 @@
 <template>
-  <Stage />
+  <Stage2 />
   <div class="mt-10 text-center">
     <div class="flex justify-center" v-show="store.isPlayFinished">
       <ReplayButton />
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import Stage from '../components/Stage.vue';
+import Stage2 from '../components/Stage2.vue';
 import ReplayButton from '../components/button/ReplayButton.vue'
 import TweetButton from '../components/button/TweetButton.vue'
 import RegisterRankingButton from '../components/button/RegisterRankingButton.vue'
@@ -23,7 +23,7 @@ import { useStageStore } from '../store/stageStore'
 
 const store = useStageStore()
 store.$reset()
-store.normalMode()
+store.hardMode()
 
 </script>
 

@@ -2,7 +2,7 @@
   <teleport to="body">
     <div class="modal" id="ranking-modal" v-show="isVisible" @click="close"></div>
     <div class="modal-content" v-show="isVisible">
-      <h1 class="text-2xl">ランキング</h1>
+      <h1 class="text-2xl">ランキング({{store.gameMode}})</h1>
       <div class="shadow-md mt-5">
         <table class="w-full text-left width-600">
           <thead class="text-gray-700 bg-gray-50">
@@ -40,6 +40,9 @@
 </template>
 
 <script setup lang="ts">
+import { useStageStore } from '../../store/stageStore'
+
+const store = useStageStore()
 
 interface Props {
   isVisible: boolean

@@ -1,13 +1,11 @@
 <template>
-  <a :href="`https://twitter.com/intent/tweet?url=https://gorilla-collecting-banana.netlify.app/&hashtags=ゴリラのバナナ集め&text=ゴリラが集めたバナナの本数は${score}本でした！`" class="twitter-btn  text-xl" target="_blank">ツイートする</a>
+  <a :href="`https://twitter.com/intent/tweet?url=https://gorilla-collecting-banana.netlify.app/&hashtags=ゴリラのバナナ集め&text=${store.tweetPreMessage}ゴリラが集めたバナナの本数は${store.score}本でした！`" class="twitter-btn  text-xl" target="_blank">ツイートする</a>
 </template>
 
 <script setup lang="ts">
+import { useStageStore } from '../../store/stageStore'
 
-interface Props {
-  score: number
-}
-const props = defineProps<Props>()
+const store = useStageStore()
 
 </script>
 

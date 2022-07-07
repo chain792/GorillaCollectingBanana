@@ -12,7 +12,9 @@ import { reactive, ref } from 'vue'
 import { db } from '../../firebase/firebase'
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import RankingModal from '../modal/RankingModal.vue';
+import { useStageStore } from '../../store/stageStore'
 
+const store = useStageStore()
 
 const isVisibleRankingModal = ref(false)
 
@@ -20,7 +22,7 @@ let rankings = reactive<any[]>([])
 
 const showRankingModal = async (): Promise<void> => {
   rankings.splice(0)
-  const querySnapshot = await getDocs(query(collection(db, "rankings"), orderBy('score', 'desc'), limit(10)));
+  const querySnapshot = await getDocs(query(collection(db, store.collectionName), orderBy('score', 'desc'), limit(10)));
   querySnapshot.forEach((doc) => {
     rankings.push(doc.data())
   });

@@ -3,7 +3,7 @@
     <div class="click-none score">{{score}} 本</div>
     <img src="../assets/gorilla.png" width="50" height="50" class="click-none" id="gorilla">
     <BananaLayer class="click-none" @create-banana="createBanana" :isFinished="isFinished" />
-    <SnakeLayer class="click-none" @create-snake="createSnake" :isFinished="isFinished" />
+    <ReaperLayer class="click-none" @create-reaper="createReaper" :isFinished="isFinished" />
   </div>
   <GameOverModal :isVisible="isVisibleModal" :score="score" @close-modal="closeModal" /> 
 </template>
@@ -12,9 +12,9 @@
 import { ref, onMounted,  onBeforeUnmount } from 'vue'
 import { Gorilla } from '../core/gorilla'
 import { Banana } from '../core/banana'
-import { Snake } from '../core/snake'
+import { Reaper } from '../core/reaper'
 import BananaLayer from '../components/BananaLayer.vue'
-import SnakeLayer from '../components/SnakeLayer.vue'
+import ReaperLayer from '../components/ReaperLayer.vue'
 import GameOverModal from './modal/GameOverModal.vue'
 import { useStageStore } from '../store/stageStore'
 
@@ -22,7 +22,7 @@ const store = useStageStore()
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
-const snakes: Array<Snake> = []
+const reapers: Array<Reaper> = []
 let score = ref(0)
 let isFinished = ref(false)
 
@@ -40,8 +40,8 @@ const createBanana = (banana: Banana) => {
   bananas.push(banana)
 }
 
-const createSnake = (snake: Snake) => {
-  snakes.push(snake)
+const createReaper = (reaper: Reaper) => {
+  reapers.push(reaper)
 }
 
 const play = () => {
@@ -54,9 +54,9 @@ const play = () => {
     }
   }
 
-  for(let snake of snakes){
-    snake.move(gorilla.positions())
-    if(snake.isCollision(gorilla.positions())){
+  for(let reaper of reapers){
+    reaper.move(gorilla.positions())
+    if(reaper.isCollision(gorilla.positions())){
       isFinished.value = true
       store.setScore(score.value)
       openModal()
@@ -88,7 +88,7 @@ const closeModal = (): void => {
 .stage{
   width: 800px;
   height: 600px;
-  background-color: darkseagreen;
+  background-color: rgba(169, 169, 169, 0.5);
   margin: 0 auto;
   margin-top: 50px;
   position: relative;

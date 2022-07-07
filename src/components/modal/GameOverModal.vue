@@ -7,7 +7,7 @@
       <p class="text-2xl mt-1">{{score}} 本</p>
       <div class="mt-5 flex justify-center">
         <ReplayButton class="-ml-6" />
-        <TweetButton :score="score" />
+        <TweetButton />
       </div>
       <div class="mt-5 flex justify-center">
         <RegisterRankingButton />
