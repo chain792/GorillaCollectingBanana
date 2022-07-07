@@ -45,25 +45,24 @@ const createReaper = (reaper: Reaper) => {
 }
 
 const play = () => {
-  bananas.forEach(banana => {
+  for(let banana of bananas){
     if(banana.isCollision(gorilla.positions())){
       score.value += 1
       banana.destroy()
       const index = bananas.indexOf(banana)
       bananas.splice(index, 1)
     }
-  })
+  }
 
-  reapers.forEach(reaper => {
+  for(let reaper of reapers){
     reaper.move(gorilla.positions())
     if(reaper.isCollision(gorilla.positions())){
       isFinished.value = true
-      store.set(score.value)
+      store.setScore(score.value)
       openModal()
       return
     }
-  })
-  if(isFinished.value) return
+  }
   requestAnimationFrame(play)
 }
 

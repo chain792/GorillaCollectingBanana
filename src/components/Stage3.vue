@@ -45,37 +45,36 @@ const createDragon = (dragon: Dragon) => {
 }
 
 const play = () => {
-  bananas.forEach(banana => {
+  for(let banana of bananas){
     if(banana.isCollision(gorilla.positions())){
       score.value += 1
       banana.destroy()
       const index = bananas.indexOf(banana)
       bananas.splice(index, 1)
     }
-  })
+  }
 
-  dragons.forEach(dragon => {
+  for(let dragon of dragons){
     dragon.move(gorilla.positions())
     if(dragon.isCollision(gorilla.positions())){
       isFinished.value = true
-      store.set(score.value)
+      store.setScore(score.value)
       openModal()
       return
     }
 
-    dragon.fires.forEach(fire => {
-      if(!fire.isOutStage()){
-        fire.move()
-        if(fire.isCollision(gorilla.positions())){
-          isFinished.value = true
-          store.set(score.value)
-          openModal()
-          return
-        }
+    for(let fire of dragon.fires){
+      if(fire.isOutStage()) continue
+
+      fire.move()
+      if(fire.isCollision(gorilla.positions())){
+        isFinished.value = true
+        store.setScore(score.value)
+        openModal()
+        return
       }
-    })
-  })
-  if(isFinished.value) return
+    }
+  }
   requestAnimationFrame(play)
 }
 

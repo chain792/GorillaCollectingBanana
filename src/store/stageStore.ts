@@ -13,7 +13,7 @@ export const useStageStore = defineStore('app', {
     isRegistered: false,
   }),
   actions: {
-    set(score: number): void {
+    setScore(score: number): void {
       this.score = score
       this.isPlayFinished = true
     },

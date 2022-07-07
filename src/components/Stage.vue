@@ -45,25 +45,24 @@ const createSnake = (snake: Snake) => {
 }
 
 const play = () => {
-  bananas.forEach(banana => {
+  for(let banana of bananas){
     if(banana.isCollision(gorilla.positions())){
       score.value += 1
       banana.destroy()
       const index = bananas.indexOf(banana)
       bananas.splice(index, 1)
     }
-  })
+  }
 
-  snakes.forEach(snake => {
+  for(let snake of snakes){
     snake.move(gorilla.positions())
     if(snake.isCollision(gorilla.positions())){
       isFinished.value = true
-      store.set(score.value)
+      store.setScore(score.value)
       openModal()
       return
     }
-  })
-  if(isFinished.value) return
+  }
   requestAnimationFrame(play)
 }
 
