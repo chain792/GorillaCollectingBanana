@@ -25,7 +25,7 @@ onMounted(() => {
   addDragon()
   intervalID = window.setInterval(() => {
     addDragon()
-  }, 10000)
+  }, 15000)
 })
 
 const addDragon = (): void => {

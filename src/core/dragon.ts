@@ -7,7 +7,7 @@ export class Dragon {
   private speed: number = 0.5
   fires: Array<Fire> = []
   private static intervalIDs: Array<number> = []
-  private static readonly size: number = 200
+  private static readonly size: number = 160
   private static parentElement: HTMLElement
 
   constructor(parentElement: HTMLElement){
@@ -29,7 +29,7 @@ export class Dragon {
 
     const intervalID = window.setInterval(() => {
       this.breathe()
-    }, 1000)
+    }, 1300)
     Dragon.intervalIDs.push(intervalID)
     Dragon.parentElement = parentElement
   }
@@ -49,7 +49,7 @@ export class Dragon {
 
   isCollision(positions: Array<number>): boolean {
     const distance = Math.sqrt((this.positionX + ((Dragon.size - 50) / 2) - positions[0]) ** 2 + (this.positionY + ((Dragon.size - 50) / 2) - positions[1]) ** 2)
-    if(distance < 100){
+    if(distance < (Dragon.size / 2)){
       return true
     }else{
       return false

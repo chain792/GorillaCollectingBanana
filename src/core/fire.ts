@@ -15,7 +15,7 @@ export class Fire {
     fireImage.style.left = '0px'
     
     const arg = Math.random() * 2 * Math.PI
-    const speed = Math.random() * 2 + 2
+    const speed = 2
     this.speedX = Math.sin(arg) * speed
     this.speedY = Math.cos(arg) * speed
 
