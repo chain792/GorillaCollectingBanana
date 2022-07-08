@@ -18,7 +18,7 @@ export class Dragon {
     dragonImage.style.position = 'absolute'
     dragonImage.style.top = '0px'
     dragonImage.style.left = '0px'
-    let x = 850
+    let x = 890
     let y = 200
   
     dragonImage.style.transform = `matrix(1, 0, 0, 1, ${x}, ${y})`
