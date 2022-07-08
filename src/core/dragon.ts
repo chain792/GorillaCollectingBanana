@@ -57,6 +57,7 @@ export class Dragon {
   }
 
   breathe(){
+    if(this.positionX > 800) return
     this.fires.push(new Fire(Dragon.parentElement, this.positionX, this.positionY))
   }
 
