@@ -27,7 +27,7 @@ export const useStageStore = defineStore('app', {
       this.isRegistered = true
     },
     normalMode(): void {
-      this.tweetPreMessage = ''
+      this.tweetPreMessage = 'ヘビと戯れながら'
       this.collectionName = 'normalRanking'
       this.gameMode = 'ノーマルモード'
     },
