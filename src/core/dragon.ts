@@ -41,10 +41,10 @@ export class Dragon {
     const unitVectorX = vectorX / vectorLength
     const unitVectorY = vectorY / vectorLength
 
-    this.dragon.style.transform = `matrix(1, 0, 0, 1, ${this.positionX + unitVectorX * this.speed}, ${this.positionY + unitVectorY * this.speed})`
+    this.positionX += unitVectorX * this.speed
+    this.positionY += unitVectorY * this.speed
 
-    this.positionX = this.positionX + unitVectorX * this.speed
-    this.positionY = this.positionY + unitVectorY * this.speed
+    this.dragon.style.transform = `matrix(1, 0, 0, 1, ${this.positionX}, ${this.positionY})`
   }
 
   isCollision(positions: Array<number>): boolean {

@@ -48,10 +48,10 @@ export class Snake {
     const unitVectorX = vectorX / vectorLength
     const unitVectorY = vectorY / vectorLength
 
-    this.snake.style.transform = `matrix(1, 0, 0, 1, ${this.positionX + unitVectorX * this.speed}, ${this.positionY + unitVectorY * this.speed})`
+    this.positionX += unitVectorX * this.speed
+    this.positionY += unitVectorY * this.speed
 
-    this.positionX = this.positionX + unitVectorX * this.speed
-    this.positionY = this.positionY + unitVectorY * this.speed
+    this.snake.style.transform = `matrix(1, 0, 0, 1, ${this.positionX}, ${this.positionY})`
   }
 
   isCollision(positions: Array<number>): boolean {
