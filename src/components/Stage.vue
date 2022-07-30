@@ -17,8 +17,10 @@ import BananaLayer from '../components/BananaLayer.vue'
 import SnakeLayer from '../components/SnakeLayer.vue'
 import GameOverModal from './modal/GameOverModal.vue'
 import { useStageStore } from '../store/stageStore'
+import { useVolumeStore } from '../store/volumeStore'
 
-const store = useStageStore()
+const stageStore = useStageStore()
+const volumeStore = useVolumeStore()
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
@@ -27,7 +29,9 @@ let score = ref(0)
 let isFinished = ref(false)
 const audioSnake = new Audio("/tanosimi.mp3")
 audioSnake.loop = true
+audioSnake.volume = volumeStore.bgmVolume / 100
 const audioBanana = new Audio("/banana.mp3")
+audioBanana.volume = volumeStore.effectVolume / 100
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
@@ -72,7 +76,7 @@ const play = () => {
     if(snake.isCollision(gorilla.positions())){
       isFinished.value = true
       audioSnake.pause()
-      store.setScore(score.value)
+      stageStore.setScore(score.value)
       openModal()
       return
     }

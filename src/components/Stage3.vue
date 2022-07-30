@@ -17,8 +17,10 @@ import BananaLayer from '../components/BananaLayer.vue'
 import DragonLayer from '../components/DragonLayer.vue'
 import GameOverModal from './modal/GameOverModal.vue'
 import { useStageStore } from '../store/stageStore'
+import { useVolumeStore } from '../store/volumeStore'
 
-const store = useStageStore()
+const stageStore = useStageStore()
+const volumeStore = useVolumeStore()
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
@@ -27,7 +29,9 @@ let score = ref(0)
 let isFinished = ref(false)
 const audioDragon = new Audio("/Es-Boss-Final.mp3")
 audioDragon.loop = true
+audioDragon.volume = volumeStore.bgmVolume / 100
 const audioBanana = new Audio("/banana.mp3")
+audioBanana.volume = volumeStore.effectVolume / 100
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
@@ -72,7 +76,7 @@ const play = () => {
     if(dragon.isCollision(gorilla.positions())){
       isFinished.value = true
       audioDragon.pause()
-      store.setScore(score.value)
+      stageStore.setScore(score.value)
       openModal()
       return
     }
@@ -84,7 +88,7 @@ const play = () => {
       if(fire.isCollision(gorilla.positions())){
         isFinished.value = true
         audioDragon.pause()
-        store.setScore(score.value)
+        stageStore.setScore(score.value)
         openModal()
         return
       }

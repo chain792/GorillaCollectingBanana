@@ -16,6 +16,7 @@
 import { ref } from 'vue'
 import RegisterRankingModal from '../modal/RegisterRankingModal.vue';
 import { useStageStore } from '../../store/stageStore'
+import { pi } from '../../core/pi'
 
 const store = useStageStore()
 
@@ -24,10 +25,12 @@ const isVisibleRegisterRankingModal = ref(false)
 
 const showRegisterRankingModal = (): void => {
   isVisibleRegisterRankingModal.value = true
+  pi()
 }
 
 const closeRegisterRankingModal = (): void => {
   isVisibleRegisterRankingModal.value = false
+  pi()
 }
 
 </script>

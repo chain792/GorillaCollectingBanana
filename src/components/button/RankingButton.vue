@@ -13,6 +13,7 @@ import { db } from '../../firebase/firebase'
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import RankingModal from '../modal/RankingModal.vue';
 import { useStageStore } from '../../store/stageStore'
+import { pi } from '../../core/pi'
 
 const store = useStageStore()
 
@@ -27,10 +28,12 @@ const showRankingModal = async (): Promise<void> => {
     rankings.push(doc.data())
   });
   isVisibleRankingModal.value = true
+  pi()
 }
 
 const closeRankingModal = (): void => {
   isVisibleRankingModal.value = false
+  pi()
 }
 
 </script>

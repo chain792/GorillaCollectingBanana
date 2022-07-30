@@ -17,8 +17,10 @@ import BananaLayer from '../components/BananaLayer.vue'
 import ReaperLayer from '../components/ReaperLayer.vue'
 import GameOverModal from './modal/GameOverModal.vue'
 import { useStageStore } from '../store/stageStore'
+import { useVolumeStore } from '../store/volumeStore'
 
-const store = useStageStore()
+const stageStore = useStageStore()
+const volumeStore = useVolumeStore()
 
 let gorilla: Gorilla
 const bananas: Array<Banana> = []
@@ -27,7 +29,9 @@ let score = ref(0)
 let isFinished = ref(false)
 const audioReaper = new Audio("/Horror-gouma.mp3")
 audioReaper.loop = true
+audioReaper.volume = volumeStore.bgmVolume / 100
 const audioBanana = new Audio("/banana.mp3")
+audioBanana.volume = volumeStore.effectVolume / 100
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
@@ -72,7 +76,7 @@ const play = () => {
     if(reaper.isCollision(gorilla.positions())){
       isFinished.value = true
       audioReaper.pause()
-      store.setScore(score.value)
+      stageStore.setScore(score.value)
       openModal()
       return
     }

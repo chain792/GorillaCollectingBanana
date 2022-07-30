@@ -3,8 +3,10 @@
 </template>
 
 <script setup lang="ts">
+import { pi } from '../../core/pi'
 
 const reload = (): void => {
+  pi()
   document.location.reload()
 }
 

@@ -22,6 +22,7 @@ import { ref, onMounted } from 'vue'
 import { db } from '../../firebase/firebase'
 import { collection, addDoc, Timestamp} from "firebase/firestore";
 import { useStageStore } from '../../store/stageStore'
+import { pi } from '../../core/pi'
 
 const store = useStageStore()
 
@@ -66,6 +67,7 @@ const submit = async (): Promise<void> => {
   } catch (e) {
     console.error("Error adding firestore: ", e)
   }
+  pi()
 }
 
 </script>
