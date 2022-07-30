@@ -35,5 +35,13 @@ export const useVolumeStore = defineStore('volume', {
     unmuteEffectVolume(): void {
       this.effectVolume = this.effectVolumeBeforeMute
     },
+    setFromLocalStorage(): void {
+      if(localStorage.bgmVolume){
+        this.bgmVolume = Number(localStorage.bgmVolume) || 0
+      }
+      if(localStorage.effectVolume){
+        this.effectVolume = Number(localStorage.effectVolume) || 0
+      }
+    }
   }
 })

@@ -40,6 +40,10 @@ import HowToPlayModal from '../components/modal/HowToPlayModal.vue';
 import SettingModal from '../components/modal/SettingModal.vue';
 import { ref } from 'vue'
 import { pi } from '../core/pi'
+import { useVolumeStore } from '../store/volumeStore';
+
+const volumeStore = useVolumeStore()
+volumeStore.setFromLocalStorage()
 
 const isVisibleHowToPlayModal = ref(false)
 const openHowToPlayModal = (): void => {

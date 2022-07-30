@@ -22,6 +22,11 @@ import RankingButton from '../components/button/RankingButton.vue'
 import { useStageStore } from '../store/stageStore'
 import { pi } from '../core/pi'
 
+import { useVolumeStore } from '../store/volumeStore';
+
+const volumeStore = useVolumeStore()
+volumeStore.setFromLocalStorage()
+
 const store = useStageStore()
 store.$reset()
 store.hardMode()

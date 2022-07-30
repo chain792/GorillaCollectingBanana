@@ -55,18 +55,21 @@ const changeBgmVolume = (): void => {
   if(bgmRange.value){
     console.log(bgmRange.value.value)
     volumeStore.setBgmVolume(Number(bgmRange.value.value))
+    localStorage.bgmVolume = bgmRange.value.value
   }
 }
 const muteBgmVolume = (): void => {
   if(bgmRange.value){
     bgmRange.value.value = '0'
     volumeStore.muteBgmVolume()
+    localStorage.bgmVolume = '0'
   }
 }
 const unmuteBgmVolume = (): void => {
   if(bgmRange.value){
     bgmRange.value.value = String(volumeStore.bgmVolumeBeforeMute)
     volumeStore.unmuteBgmVolume()
+    localStorage.bgmVolume = bgmRange.value.value
   }
 }
 
@@ -75,18 +78,21 @@ const changeEffectVolume = (): void => {
   if(effectRange.value){
     console.log(effectRange.value.value)
     volumeStore.setEffectVolume(Number(effectRange.value.value))
+    localStorage.effectVolume = effectRange.value.value
   }
 }
 const muteEffectVolume = (): void => {
   if(effectRange.value){
     effectRange.value.value = '0'
     volumeStore.muteEffectVolume()
+    localStorage.effectVolume = '0'
   }
 }
 const unmuteEffectVolume = (): void => {
   if(effectRange.value){
     effectRange.value.value = String(volumeStore.effectVolumeBeforeMute)
     volumeStore.unmuteEffectVolume()
+    localStorage.effectVolume = effectRange.value.value
   }
 }
 
