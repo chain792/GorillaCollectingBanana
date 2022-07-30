@@ -25,12 +25,22 @@ const bananas: Array<Banana> = []
 const snakes: Array<Snake> = []
 let score = ref(0)
 let isFinished = ref(false)
+const audioSnake = new Audio("/tanosimi.mp3")
+audioSnake.loop = true
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
   gorilla = new Gorilla(gorillaElement)
   play()
+  audioSnake.play()
 })
+
+document.body.addEventListener('click', () => {
+  if(audioSnake.paused && !isFinished.value){
+    audioSnake.play()
+  }
+})
+
 
 const moveGorilla = (e: MouseEvent): void => {
   gorilla.move(e.offsetX, e.offsetY)
@@ -58,16 +68,22 @@ const play = () => {
     snake.move(gorilla.positions())
     if(snake.isCollision(gorilla.positions())){
       isFinished.value = true
+      audioSnake.pause()
       store.setScore(score.value)
       openModal()
       return
     }
+  }
+
+  if(isFinished.value){
+    return
   }
   requestAnimationFrame(play)
 }
 
 onBeforeUnmount(() => {
   isFinished.value = true
+  audioSnake.pause()
 })
 
 

@@ -33,7 +33,7 @@ const addSnake = (): void => {
 }
 
 watch(isFinished, () => {
-  if(isFinished){
+  if(isFinished.value){
     window.clearInterval(intervalID)
   }
 })

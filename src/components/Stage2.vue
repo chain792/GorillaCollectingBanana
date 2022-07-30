@@ -25,12 +25,22 @@ const bananas: Array<Banana> = []
 const reapers: Array<Reaper> = []
 let score = ref(0)
 let isFinished = ref(false)
+const audioReaper = new Audio("/Horror-gouma.mp3")
+audioReaper.loop = true
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
   gorilla = new Gorilla(gorillaElement)
   play()
+  audioReaper.play()
 })
+
+document.body.addEventListener('click', () => {
+  if(audioReaper.paused && !isFinished.value){
+    audioReaper.play()
+  }
+})
+
 
 const moveGorilla = (e: MouseEvent): void => {
   gorilla.move(e.offsetX, e.offsetY)
@@ -58,16 +68,22 @@ const play = () => {
     reaper.move(gorilla.positions())
     if(reaper.isCollision(gorilla.positions())){
       isFinished.value = true
+      audioReaper.pause()
       store.setScore(score.value)
       openModal()
       return
     }
+  }
+
+  if(isFinished.value){
+    return
   }
   requestAnimationFrame(play)
 }
 
 onBeforeUnmount(() => {
   isFinished.value = true
+  audioReaper.pause()
 })
 
 

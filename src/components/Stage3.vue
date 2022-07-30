@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted,  onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { Gorilla } from '../core/gorilla'
 import { Banana } from '../core/banana'
 import { Dragon } from '../core/dragon'
@@ -25,12 +25,22 @@ const bananas: Array<Banana> = []
 const dragons: Array<Dragon> = []
 let score = ref(0)
 let isFinished = ref(false)
+const audioDragon = new Audio("/Es-Boss-Final.mp3")
+audioDragon.loop = true
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
   gorilla = new Gorilla(gorillaElement)
   play()
+  audioDragon.play()
 })
+
+document.body.addEventListener('click', () => {
+  if(audioDragon.paused && !isFinished.value){
+    audioDragon.play()
+  }
+})
+
 
 const moveGorilla = (e: MouseEvent): void => {
   gorilla.move(e.offsetX, e.offsetY)
@@ -58,6 +68,7 @@ const play = () => {
     dragon.move(gorilla.positions())
     if(dragon.isCollision(gorilla.positions())){
       isFinished.value = true
+      audioDragon.pause()
       store.setScore(score.value)
       openModal()
       return
@@ -69,17 +80,23 @@ const play = () => {
       fire.move()
       if(fire.isCollision(gorilla.positions())){
         isFinished.value = true
+        audioDragon.pause()
         store.setScore(score.value)
         openModal()
         return
       }
     }
   }
+
+  if(isFinished.value){
+    return
+  }
   requestAnimationFrame(play)
 }
 
 onBeforeUnmount(() => {
   isFinished.value = true
+  audioDragon.pause()
 })
 
 
