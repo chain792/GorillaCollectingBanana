@@ -27,6 +27,7 @@ let score = ref(0)
 let isFinished = ref(false)
 const audioDragon = new Audio("/Es-Boss-Final.mp3")
 audioDragon.loop = true
+const audioBanana = new Audio("/banana.mp3")
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
@@ -61,6 +62,8 @@ const play = () => {
       banana.destroy()
       const index = bananas.indexOf(banana)
       bananas.splice(index, 1)
+      audioBanana.currentTime = 0
+      audioBanana.play()
     }
   }
 

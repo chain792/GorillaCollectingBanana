@@ -27,6 +27,7 @@ let score = ref(0)
 let isFinished = ref(false)
 const audioReaper = new Audio("/Horror-gouma.mp3")
 audioReaper.loop = true
+const audioBanana = new Audio("/banana.mp3")
 
 onMounted(() => {
   const gorillaElement = document.getElementById('gorilla')!
@@ -61,6 +62,8 @@ const play = () => {
       banana.destroy()
       const index = bananas.indexOf(banana)
       bananas.splice(index, 1)
+      audioBanana.currentTime = 0
+      audioBanana.play()
     }
   }
 
