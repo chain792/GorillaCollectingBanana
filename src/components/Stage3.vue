@@ -98,7 +98,7 @@ const play = () => {
   if(isFinished.value){
     return
   }
-  requestAnimationFrame(play)
+  setTimeout(play, 1000 / 60)
 }
 
 onBeforeUnmount(() => {

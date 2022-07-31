@@ -33,6 +33,7 @@ const addReaper = (): void => {
 watch(isFinished, () => {
   if (isFinished.value) {
     window.clearInterval(intervalID);
+    Reaper.initialize();
   }
 });
 

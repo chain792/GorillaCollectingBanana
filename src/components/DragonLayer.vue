@@ -36,6 +36,7 @@ const addDragon = (): void => {
 watch(isFinished, () => {
   if(isFinished.value){
     window.clearInterval(intervalID)
+    Dragon.initialize()
   }
 })
 
