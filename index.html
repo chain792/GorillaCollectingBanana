@@ -19,4 +19,11 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
+  <script>
+    const url = "https://gorilla-collecting-banana.netlify.app"
+    const ogpType = location.href.replace(/.*\?ogp=/,'')
+    if(ogpType === "2" || ogpType === "3"){
+      document.querySelector('meta[property="og:image"]').setAttribute("content", `${url}/ogp${ogpType}.png`);
+    }
+  </script>
 </html>
