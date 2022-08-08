@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://gorilla-collecting-banana.netlify.app/">
     <meta property="og:title" content="ゴリラのバナナ集め">
     <meta property="og:description" content="ゴリラがバナナを集めるゲーム、ヘビに注意">
-    <meta property="og:image" content="https://gorilla-collecting-banana.netlify.app/ogp.png">
+    <meta property="og:image" content="https://gorilla-collecting-banana.netlify.app/ogp_snake.png">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
@@ -22,8 +22,8 @@
   <script>
     const url = "https://gorilla-collecting-banana.netlify.app"
     const ogpType = location.href.replace(/.*\?ogp=/,'')
-    if(ogpType === "2" || ogpType === "3"){
-      document.querySelector('meta[property="og:image"]').setAttribute("content", `${url}/ogp${ogpType}.png`);
+    if(ogpType === "reaper" || ogpType === "dragon"){
+      document.querySelector('meta[property="og:image"]').setAttribute("content", `${url}/ogp_${ogpType}.png`);
     }
   </script>
 </html>
