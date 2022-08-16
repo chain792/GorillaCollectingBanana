@@ -22,7 +22,12 @@
   <script>
     const url = "https://gorilla-collecting-banana.netlify.app"
     const ogpType = location.href.replace(/.*\?ogp=/,'')
-    if(ogpType === "reaper" || ogpType === "dragon"){
+    // 本当はogpTypeが 2 or 3 もしくは reaper or dragon で分岐したかったが
+    // NetlifyのPrerenderingがうまく反映されないためとりえず現時点でうまく行く方法で実現する
+    if(ogpType === "2"){
+      document.querySelector('meta[property="og:image"]').setAttribute("content", `${url}/ogp${ogpType}.png`);
+    }
+    if(ogpType === "dragon"){
       document.querySelector('meta[property="og:image"]').setAttribute("content", `${url}/ogp_${ogpType}.png`);
     }
   </script>

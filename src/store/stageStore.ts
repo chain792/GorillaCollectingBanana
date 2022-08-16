@@ -7,7 +7,7 @@ interface StageState {
   tweetPreMessage: string
   collectionName: string
   gameMode: string
-  ogpType: 'snake' | 'reaper' | 'dragon'
+  ogpType: 'snake' | 'reaper' | 'dragon' | '2'
 }
 
 export const useStageStore = defineStore('app', {
@@ -38,7 +38,7 @@ export const useStageStore = defineStore('app', {
       this.tweetPreMessage = '死神に追いかけられながら'
       this.collectionName = 'hardRanking'
       this.gameMode = 'ハードモード'
-      this.ogpType = 'reaper'
+      this.ogpType = '2'
     },
     extraMode(): void {
       this.tweetPreMessage = 'ドラゴンに攻撃されながら'
